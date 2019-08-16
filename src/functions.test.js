@@ -63,15 +63,18 @@
  * }
  */
 
-// ...
-
+const yelling = words => {
+  return words.map(word => word.toUpperCase())
+}
 /**
  *
  * Define a function named `doubleTrouble` that takes an array of
  * numbers as an argument and returns a new array with all
  * the numbers multiplied by 2
  */
-
+const doubleTrouble = single => {
+  return single.map(single => single * 2)
+}
 // ...
 
 /*
@@ -79,6 +82,13 @@
  * strings as an argument and returns a new array with each string
  * suffixed with " is at index X" where X is the index of the element
  */
+const stringyIndexes = stringy => {
+  let indexCount = -1
+  return stringy.map(stringy => {
+    indexCount += 1
+    return stringy + ' is at index ' + indexCount
+  })
+}
 
 // ...
 
@@ -86,6 +96,11 @@
  * Define a function onlyTheEvenSurvive that accepts an array of
  * numbers and returns only the elements that are even
  */
+function onlyTheEvenSurvive(a) {
+  return a.filter(function (val) {
+    return val % 2 === 0
+  })
+}
 
 // ...
 
@@ -93,6 +108,12 @@
  * Define a function onlyTheEvenIndexedSurvive that accepts an array of
  * numbers and returns only the elements at indexes that are even
  */
+
+const onlyTheEvenIndexedSurvive = numbers => {
+  return numbers.filter((number, index) => {
+    return index % 2 === 0
+  })
+}
 
 // ...
 
@@ -109,6 +130,15 @@
  *   score: 99
  * }
  */
+const bestMoviesOfTheYear = (movies, year) => {
+  return movies
+    .filter(movie => {
+      return movie.year === year && movie.score >= 90
+    })
+    .map(movie => {
+      return movie.name
+    })
+}
 
 // ...
 
@@ -118,6 +148,13 @@
  * odd.
  */
 
+const everyoneIsOdd = number => {
+  if (number.reduce % 1 === 0) {
+    return false
+  } else {
+    return true
+  }
+}
 // ...
 
 /*
@@ -125,8 +162,11 @@
  * strings and returns the one string that contains the word
  * `needle` inside
  */
-
 // ...
+
+const findTheNeedle = words => {
+  return words.filter(word => word.includes('needle'))[0]
+}
 
 /*
  * Define a function findTheNeedleIndex that accepts an array of
@@ -152,7 +192,6 @@
  *
  * So no using forEach, map, filter, reduce, etc.
  */
-
 // ...
 
 /*
@@ -176,7 +215,6 @@
  *
  * So no using forEach, map, filter, reduce, etc.
  */
-
 // ...
 
 /**
@@ -189,7 +227,9 @@ import test from 'ava'
 
 const ensureDefined = (t, method) => {
   if (eval(`typeof ${method}`) !== 'function') {
-    t.fail(`\n\n\n\n\n⚡️⚡️⚡️⚡️⚡️ The next step is to define the function ${method} ⚡️⚡️⚡️⚡️⚡️\n\n\n`)
+    t.fail(
+      `\n\n\n\n\n⚡️⚡️⚡️⚡️⚡️ The next step is to define the function ${method} ⚡️⚡️⚡️⚡️⚡️\n\n\n`
+    )
   }
 }
 
@@ -302,15 +342,46 @@ test('onlyTheEvenIndexedSurvive', t => {
 
 test('Function Check', t => ensureDefined(t, 'bestMoviesOfTheYear'))
 test('bestMoviesOfTheYear', t => {
-  const movies = [
-    { name: 'The Grand Budapest Hotel', year: 2014, score: 91 },
-    { name: 'Birdman', year: 2014, score: 91 },
-    { name: 'Transformers: Age of Extinction', year: 2014, score: 18 },
-    { name: 'Rage', year: 2014, score: 14 },
-    { name: 'Get Out', year: 2017, score: 99 },
-    { name: 'Justice League', year: 2017, score: 40 },
-    { name: 'Ghost in the Shell', year: 2017, score: 46 },
-    { name: 'The Big Sick', year: 2017, score: 98 }
+  const movies = [{
+      name: 'The Grand Budapest Hotel',
+      year: 2014,
+      score: 91
+    },
+    {
+      name: 'Birdman',
+      year: 2014,
+      score: 91
+    },
+    {
+      name: 'Transformers: Age of Extinction',
+      year: 2014,
+      score: 18
+    },
+    {
+      name: 'Rage',
+      year: 2014,
+      score: 14
+    },
+    {
+      name: 'Get Out',
+      year: 2017,
+      score: 99
+    },
+    {
+      name: 'Justice League',
+      year: 2017,
+      score: 40
+    },
+    {
+      name: 'Ghost in the Shell',
+      year: 2017,
+      score: 46
+    },
+    {
+      name: 'The Big Sick',
+      year: 2017,
+      score: 98
+    }
   ]
 
   t.deepEqual(bestMoviesOfTheYear(movies, 2014), [
